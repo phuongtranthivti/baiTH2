@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1</title>
+</head>
+
+<body>
+    <form method="POST" action="result.php">
+        <p>
+            Nhập a:
+            <input id="first" type="number" required>
+        </p>
+        <p>
+            Nhập b:
+            <input id="second" type="number" required>
+        </p>
+        <p>
+            Nhập c:
+            <input id="third" type="number" required>
+        </p>
+        <button type="button" onclick="result()">Result By JS</button>
+        <button type="submit">Result By PHP</button>
+    </form>
+
+    <div id="ketqua" style="display: none;color: red;">
+        kết quả: 
+        <span id="result"></span>
+    </div>
+</body>
+<script>
+    function result() {
+        var a = document.getElementById("first").value;
+        var b = document.getElementById("second").value; 
+        var c = document.getElementById("third").value; 
+        if (a == 0) {
+            if (b == 0) {
+                if ( c == 0) {
+                    document.getElementById("result").innerHTML = "Phương trình vô số nghiệm";
+                } else {
+                    document.getElementById("result").innerHTML = "Phương trình vô nghiệm";
+                }
+            } else {
+            document.getElementById("result").innerHTML = -c/b;
+            }
+        } else {
+            var denta = b*b - 4*a*c;
+            if (denta == 0) {
+                document.getElementById("result").innerHTML = "Phương trình có nghiệm kép: x=" + -b/(2*a);
+            }
+            else if (denta < 0) {
+                document.getElementById("result").innerHTML = "Phương trình vô nghiệm";
+            }
+            else {
+                document.getElementById("result").innerHTML = "Phương trình có 2 nghiệm: x1= " +(-b + Math.sqrt(denta))/(2*a)+ " ;x2= " +(-b - Math.sqrt(denta))/(2*a);
+            }
+        } 
+        if (a=="" || b=="" || c==""){
+            document.getElementById("result").innerHTML = "Bạn phải nhập đầy đủ";
+        }
+        document.getElementById("ketqua").style.display = "block";
+    }
+</script>
+
+</html>

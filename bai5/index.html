@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 5</title>
+</head>
+
+<body>
+    <form action="">
+        <p>
+            Số dòng:
+            <input id="row" type="number" required>
+        </p>
+        <p>
+            Số cột:
+            <input id="column" type="number" required>
+        </p>
+        <button type="reset">Nhap Lai</button>
+        <button type="submit" onclick=" return result()">Ve</button>
+    </form>
+
+    <div id="result">
+    </div>
+</body>
+<script>
+    function result() {
+        var row = document.getElementById("row").value;
+        var column = document.getElementById("column").value;
+        if (row == "" || column == "") {
+            document.getElementById("result").innerHTML = "Bạn phải nhập đầy đủ";
+            return false;
+        }
+        if (row != "" && column != "") {
+            var result = document.getElementById("result");
+            var tagTable = document.createElement("table");
+            tagTable.border = 1;
+
+            for (var i = 0; i < row; i++) {
+                var tagRow = document.createElement("tr");
+                tagTable.appendChild(tagRow);
+                for (var j = 0; j < column; j++) {
+                    var tagColumn = document.createElement("td");
+                    var textNode = document.createTextNode("");
+                    if (j <= i ) {
+                        var textNode = document.createTextNode(j);
+                    }
+                    tagColumn.appendChild(textNode);
+                    tagColumn.style.width = "100px";
+                    tagRow.appendChild(tagColumn);
+                }
+            }
+            result.appendChild(tagTable);
+        }
+        return false
+    }
+</script>
+
+</html>
