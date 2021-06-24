@@ -19,55 +19,28 @@
         
     <p>
         Lọc theo countryId:
-        <select name="countryId" id="countryId" style="width: 180px">
-        </select>
+        <input type="text" id="searchCountryId" placeholder="Nhập CountryId">
     </p>
+    <p style="color: red;" id = "check"></p>
     <p>
         <h3> Kết quả:</h3>
     </p>
-    <table id="result">
-        <thead>
-            <th> Bank ID</th>
-            <th> Bank Name</th>
-        </thead>
-        <tbody id="body">
-
-        </tbody>
-    </table>
+    <div id="result">
+    </div>
 </body>
 
 <script>
-    function getList() {
-        var banks = getData();
-        var table = document.getElementById(("resoult"));
-        var tagTable = document.getElementById("body");
-        tagTable.border = 1;
-
-        var rowCount = table.rows.length; 
-        if ( rowCount >3 )   {
-        for (var i = 1; i < rowCount - 1; i++) {    
-        var row = table.rows[i]["Limit"].ToString();
-            console.log(row);
-        }
-    }
-        banks.forEach(function (bank) {
-            var name = document.getElementById("search").value;           
-            if (bank.bankName == name || bank.nameVI == name) {
-
-                console.log(bank.bankCode, name);
-                var tagRow = document.createElement("tr");
-                tagTable.appendChild(tagRow);
-                
-                var tagColumn = document.createElement("td");
-                var textNode = document.createTextNode(bank.bankCode);
-                tagColumn.appendChild(textNode);
-                tagRow.appendChild(tagColumn); 
-                var tagColumn = document.createElement("td");
-                var textNode = document.createTextNode(bank.bankName);
-                tagColumn.appendChild(textNode);
-                tagRow.appendChild(tagColumn); 
+    function getList() {       
+        var banks = getData();           
+        var name = document.getElementById("search").value;
+        var result = document.getElementById("result");
+        var str = ''; 
+        banks.forEach(function (bank) {        
+            if (bank.bankName.search(name) != -1) {
+                str += "BankID: " +bank.bankCode+ "; Bank Name: " +bank.bankName+ "<br>";
             }
         });
+        result.innerHTML = str;
     }
 </script>
 </html>
